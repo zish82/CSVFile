@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CSVFILE.Models
 {
-    public partial class Stock
+    public partial class Stock //Why this is partial, I know it might be due to EF but doesn't look right to me, for simple things you should have never have to use these
     {
         public int ProductId { get; set; }
         public string Product { get; set; }
