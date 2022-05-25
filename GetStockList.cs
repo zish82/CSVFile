@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CSVFILE
 {
-    public class GetStockList
+    public class GetStockList /////Note this should be a service with a IGetStockList
     {
         public List<Stock> getStockList()
         {
