@@ -7,7 +7,7 @@ using NotVisualBasic.FileIO;
 
 namespace CSVFILE
 {
-    public class ReadCSV
+    public class ReadCSV ////This should be a service as well with something like IReadCSV and If possible inject CSVTextField..parser into this
     {
         //public static DataTable GetDataTabletFromCSVFile(string csv_file_path)
         //{
@@ -63,14 +63,14 @@ namespace CSVFILE
         //    }
         //    return csvData;
         //}
-        public void GetDataTabletFromCSVFile(string csv_file_path)
+        public void GetDataTabletFromCSVFile(string csv_file_path) ////Method name is get but it doesn't return anything, it should return the data
         {
             DataTable csvData = new DataTable();
 
             try
             {
 
-                using (CsvTextFieldParser csvReader = new CsvTextFieldParser(csv_file_path))
+                using (CsvTextFieldParser csvReader = new CsvTextFieldParser(csv_file_path))//What is this parser, is this a library coming from VisualBasic, that will be a no no as well, there should be similar library in C# 
                 {
                     csvReader.SetDelimiter(',');
                     csvReader.HasFieldsEnclosedInQuotes = true;
@@ -80,7 +80,7 @@ namespace CSVFILE
                         DataColumn datecolumn = new DataColumn(column);
                         datecolumn.AllowDBNull = true;
                         csvData.Columns.Add(datecolumn);
-                    }
+                    }//There should always be an empty line after barckets for code readability                    
                     InsertDatatoDB InsertDatatoDB = new InsertDatatoDB();
                     List<Stock> Stocks = new List<Stock>();
                     while (!csvReader.EndOfData)
@@ -98,17 +98,17 @@ namespace CSVFILE
                         {
                             if (fieldData[i] == "")
                             {
-                                fieldData[i] = null;
+                                fieldData[i] = null;////Why are you doing this, this doesn't look right to make empty values null for no reason
                             }
                         }
                         csvData.Rows.Add(fieldData);
 
                     }
-                    InsertDatatoDB.insertDatatoDBStock(Stocks);
+                    InsertDatatoDB.insertDatatoDBStock(Stocks); //You should not be doing 2 things, remember Single Responsibility Principle, 1 class should do 1 thing
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception ex)/////Empty exception block is a no no, that means you are consuming exceptions and your program will never know what happened
             {
             }
             //return csvData;
