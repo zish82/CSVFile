@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSVFILE
 {
-    public class InsertDatatoDB
+    public class InsertDatatoDB //// you really need to format this class
     {
         public void insertDatatoDBStock(List<Stock> Stock)
         {
@@ -22,7 +22,7 @@ namespace CSVFILE
             catch (Exception)
             {
 
-                throw;
+                throw; // again throwing exception, it's not good at all
             }
         }
     }
